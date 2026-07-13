@@ -50,9 +50,22 @@ export default function Hero({
       <div className="absolute bottom-10 right-20 w-24 h-24 bg-[#D9E1E5]/30 rounded-full blur-xl animate-ping-slow" />
 
       {/* Content container */}
-      <div className="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between px-6">
+      <div className="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row items-stretch md:items-center justify-between px-6">
+        {/* Logo image */}
+        {logoSrc && (
+          <div className="order-1 flex w-full justify-end mb-8 md:order-2 md:mb-0 md:flex-1">
+            <Image
+              src={logoSrc}
+              alt="No Sweat logo"
+              width={160}
+              height={160}
+              className="object-contain drop-shadow-lg md:w-[220px] md:h-[220px]"
+            />
+          </div>
+        )}
+
         {/* Text content */}
-        <div className="flex-1 text-center md:text-left mb-12 md:mb-0">
+        <div className="order-2 flex-1 text-center md:order-1 md:text-left mb-12 md:mb-0">
           <h1
             className={`text-4xl md:text-6xl mb-4 ${FONTS.heading}`}
             style={{ color: COLORS.iceWhite }}
@@ -79,20 +92,6 @@ export default function Hero({
             ))}
           </div>
         </div>
-
-        {/* Logo image */}
-        {logoSrc && (
-          <div className="flex-1 flex justify-center md:justify-end mt-8 md:mt-0">
-            <Image
-              src={logoSrc}
-              alt="No Sweat logo"
-              width={160}
-              height={160}
-              className="object-contain drop-shadow-lg md:w-[220px] md:h-[220px]"
-            />
-
-          </div>
-        )}
       </div>
       <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 animate-bounce text-white/80 text-sm">
         ↓ Scroll to explore
