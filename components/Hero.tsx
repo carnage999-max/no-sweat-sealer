@@ -53,7 +53,7 @@ export default function Hero({
       <div className="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row items-stretch md:items-center justify-between px-6">
         {/* Logo image */}
         {logoSrc && (
-          <div className="order-1 flex w-full justify-end mb-8 md:order-2 md:mb-0 md:flex-1">
+          <div className="order-1 flex w-full justify-center mb-8 md:order-2 md:mb-0 md:flex-1 md:justify-end">
             <Image
               src={logoSrc}
               alt="No Sweat logo"
