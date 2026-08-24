@@ -90,6 +90,22 @@ export default function Footer() {
           </p>
         </div>
       </div>
+      <p
+        className={`${FONTS.body} text-sm text-center mt-8`}
+        style={{ color: COLORS.iceWhite, opacity: 0.6 }}
+      >
+        Part of the{" "}
+        <a
+          href="https://se7eninc.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline hover:opacity-100"
+          style={{ color: COLORS.iceWhite }}
+        >
+          Se7en
+        </a>{" "}
+        family of companies.
+      </p>
     </footer>
   );
 }
