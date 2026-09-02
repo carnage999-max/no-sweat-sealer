@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { CartProvider } from '@/components/CartContext';
 import FloatingCartButton from '@/components/FloatingCartButton';
+import Script from 'next/script';
 
 const siteUrl = 'https://nosweatsealer.com';
 
@@ -83,6 +84,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <FloatingCartButton />
         </CartProvider>
+        <Script
+          src="https://now-hiring-eta.vercel.app/widget.js"
+          data-icon="Droplets"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
