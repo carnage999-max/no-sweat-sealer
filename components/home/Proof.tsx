@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { TestCard } from "@/components/testing/TestCard";
 import { btn } from "@/components/ui/button";
+import { Reveal } from "@/components/ui/Reveal";
 import { CLAIMS } from "@/content/claims";
 import { publishedTests } from "@/content/tests";
 
@@ -20,18 +21,20 @@ export function Proof() {
 
   if (latest) {
     return (
-      <section className="band border-t border-line bg-void">
+      <section className="band">
         <div className="wrap">
-          <h2 className="display display-lg">
-            {CLAIMS.testingHeadline.map((line) => (
-              <span key={line} className="block">
-                {line}
-              </span>
-            ))}
-          </h2>
-          <div className="mt-10">
+          <Reveal>
+            <h2 className="display display-lg">
+              {CLAIMS.testingHeadline.map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
+            </h2>
+          </Reveal>
+          <Reveal className="mt-10">
             <TestCard test={latest} />
-          </div>
+          </Reveal>
           <Link href="/testing" className={`${btn("ghost")} mt-8`}>
             All tests and methodology
           </Link>
@@ -41,25 +44,27 @@ export function Proof() {
   }
 
   return (
-    <section className="band border-t border-line bg-void">
-      <div className="wrap grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
-        <div>
-          <h2 className="display display-lg">{CLAIMS.testingInProgressHeadline[0]}</h2>
-          <p className="lede mt-6 text-frost">{CLAIMS.testingInProgressBody}</p>
-          <Link href="/testing" className={`${btn("ghost")} mt-8`}>
-            See testing status
-          </Link>
-        </div>
-        <div>
-          <p className="font-semibold">Every test record includes</p>
-          <ul className="mt-4 divide-y divide-line border-y border-line">
-            {RECORD_FIELDS.map((field) => (
-              <li key={field} className="py-3 text-frost">
-                {field}
-              </li>
-            ))}
-          </ul>
-        </div>
+    <section className="band">
+      <div className="wrap">
+        <Reveal className="glass grid gap-10 p-6 sm:p-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+          <div>
+            <h2 className="display display-lg">{CLAIMS.testingInProgressHeadline[0]}</h2>
+            <p className="lede mt-6 text-frost">{CLAIMS.testingInProgressBody}</p>
+            <Link href="/testing" className={`${btn("ghost")} mt-8`}>
+              See testing status
+            </Link>
+          </div>
+          <div>
+            <p className="font-semibold">Every test record includes</p>
+            <ul className="mt-4 divide-y divide-white/10 border-y border-white/10">
+              {RECORD_FIELDS.map((field) => (
+                <li key={field} className="py-3 text-frost">
+                  {field}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

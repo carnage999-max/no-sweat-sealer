@@ -22,6 +22,8 @@ export type Variant = {
   tagline: string;
   priceCents: number;
   currency: "usd";
+  /** Product render, 1122 x 1402. */
+  image: string;
   inStock: boolean;
   /** Commercial sizes get a callout and a nudge toward the wholesale form. */
   commercial: boolean;
@@ -36,6 +38,7 @@ export const VARIANTS: readonly Variant[] = [
     tagline: "Personal spray bottle",
     priceCents: 1499,
     currency: "usd",
+    image: "/product/4-oz-spray-bottle.png",
     inStock: true,
     commercial: false,
   },
@@ -47,6 +50,7 @@ export const VARIANTS: readonly Variant[] = [
     tagline: "Refill bottle",
     priceCents: 3499,
     currency: "usd",
+    image: "/product/16-oz-refill-bottle.png",
     inStock: true,
     commercial: false,
   },
@@ -58,6 +62,7 @@ export const VARIANTS: readonly Variant[] = [
     tagline: "Commercial jug",
     priceCents: 14900,
     currency: "usd",
+    image: "/product/1-gallon.png",
     inStock: true,
     commercial: true,
   },

@@ -17,11 +17,11 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-void/90 backdrop-blur-md">
-      <div className="wrap flex h-16 items-center gap-6">
-        <Logo />
+    <header className="sticky top-0 z-40 border-b border-white/10 bg-void/75 backdrop-blur-xl">
+      <div className="wrap flex h-[68px] items-center gap-3 sm:gap-6">
+        <Logo height={46} />
 
-        <nav aria-label="Primary" className="ml-4 hidden items-center gap-1 lg:flex">
+        <nav aria-label="Primary" className="ml-2 hidden items-center gap-0.5 lg:flex">
           {NAV.map((item) => {
             const active = item.href === pathname;
             return (
@@ -39,16 +39,16 @@ export function Header() {
           })}
         </nav>
 
-        <div className="ml-auto flex items-center gap-1.5">
+        <div className="ml-auto flex items-center gap-1 sm:gap-1.5">
           <CartButton />
           <Link href="/products/no-sweat" className={btn("primary", "sm")}>
-            Buy No Sweat
+            Buy<span className="hidden sm:inline">&nbsp;No Sweat</span>
           </Link>
           <button
             type="button"
             onClick={() => setMenuOpen(true)}
             aria-label="Open menu"
-            className="flex h-11 w-11 items-center justify-center rounded-[10px] text-ice hover:text-cyan lg:hidden"
+            className="flex h-11 w-10 items-center justify-center rounded-[10px] text-ice hover:text-cyan lg:hidden"
           >
             <MenuIcon className="h-6 w-6" />
           </button>
@@ -56,8 +56,8 @@ export function Header() {
       </div>
 
       <Drawer open={menuOpen} onClose={() => setMenuOpen(false)} label="Menu" side="left">
-        <div className="flex items-center justify-between border-b border-line px-6 py-4">
-          <Logo />
+        <div className="flex items-center justify-between border-b border-line px-5 py-3">
+          <Logo height={44} />
           <button
             type="button"
             onClick={() => setMenuOpen(false)}
@@ -82,7 +82,7 @@ export function Header() {
             ))}
           </ul>
         </nav>
-        <div className="border-t border-line px-6 py-5">
+        <div className="border-t border-line px-5 py-5">
           <Link
             href="/products/no-sweat"
             onClick={() => setMenuOpen(false)}

@@ -42,7 +42,7 @@ export function FaqSearch({ faqs }: { faqs: readonly Faq[] }) {
       </p>
 
       {matches.length === 0 ? (
-        <div className="mt-8 rounded-[14px] border border-line bg-graphite p-8">
+        <div className="mt-8 glass p-8">
           <p className="display display-md">No match.</p>
           <p className="mt-3 text-frost">
             Try fewer words, or{" "}

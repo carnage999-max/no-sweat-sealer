@@ -16,7 +16,7 @@ export default function ContactPage() {
       <PageIntro title="Contact us." lede="Questions about an order, the product or safety information? Send a message." />
       <section className="band">
         <div className="wrap grid gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
-          <div className="rounded-[14px] border border-line bg-graphite p-6 sm:p-10">
+          <div className="glass p-6 sm:p-10">
             <ContactForm />
           </div>
           <div>

@@ -33,7 +33,7 @@ export default async function ProductPage({
     description:
       "A clear, water-based spray engineered to reduce exterior condensation on cold drinkware.",
     brand: { "@type": "Brand", name: "No Sweat" },
-    image: `${siteUrl}/og.jpg`,
+    image: VARIANTS.map((variant) => `${siteUrl}${variant.image}`),
     offers: VARIANTS.map((variant) => ({
       "@type": "Offer",
       name: variant.name,

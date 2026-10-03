@@ -9,6 +9,7 @@ import { HowItWorks } from "@/components/home/HowItWorks";
 import { Problem } from "@/components/home/Problem";
 import { Proof } from "@/components/home/Proof";
 import { Science } from "@/components/home/Science";
+import { ValueStrip } from "@/components/home/ValueStrip";
 import { Why } from "@/components/home/Why";
 import { resolveVideo } from "@/lib/media";
 
@@ -16,6 +17,7 @@ export default function HomePage() {
   return (
     <>
       <Hero video={resolveVideo("home-hero")} />
+      <ValueStrip />
       <Problem />
       <Proof />
       <HowItWorks />

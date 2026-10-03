@@ -45,7 +45,7 @@ export function Footer() {
     <footer className="border-t border-line bg-graphite">
       <div className="wrap grid gap-12 py-16 lg:grid-cols-[1.3fr_1fr_1fr_1fr]">
         <div>
-          <Logo />
+          <Logo height={56} />
           <p className="mt-5 max-w-xs text-[0.95rem] text-frost">
             A clear, water-based spray engineered to reduce exterior condensation on cold drinkware.
           </p>

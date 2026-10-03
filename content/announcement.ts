@@ -4,7 +4,7 @@
  */
 export const ANNOUNCEMENT = {
   enabled: true,
-  text: "Prototype testing is under way. Results are published on the Testing page as they are verified.",
+  text: "Prototype testing is under way.",
   href: "/testing",
   linkLabel: "See testing status",
 } as const;

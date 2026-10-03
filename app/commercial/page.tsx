@@ -60,7 +60,7 @@ export default function CommercialPage() {
             ) : null}
           </div>
 
-          <div id="inquiry" className="rounded-[14px] border border-line bg-graphite p-6 sm:p-10">
+          <div id="inquiry" className="glass p-6 sm:p-10">
             <h2 className="display display-md">Commercial inquiry</h2>
             <p className="mt-3 mb-8 text-frost">Tell us about your business and we&rsquo;ll reply by email.</p>
             <CommercialForm />

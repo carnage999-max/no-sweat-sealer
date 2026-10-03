@@ -1,45 +1,46 @@
 import Image from "next/image";
 
+import { Reveal } from "@/components/ui/Reveal";
 import { CLAIMS } from "@/content/claims";
 
 export function Problem() {
   return (
-    <section className="band border-t border-line bg-graphite">
-      <div className="wrap grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
-        <figure>
-          <div className="relative aspect-[760/470] overflow-hidden rounded-[14px] border border-line">
-            <Image
-              src="/images/problem-puddle.jpg"
-              alt="A sweating iced drink beside a spreading puddle on a dark counter, with drops still running down the cup."
-              fill
-              sizes="(min-width: 1024px) 600px, 92vw"
-              className="object-cover"
-            />
-            <p className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-void/70 px-3 py-1.5 text-[0.8rem] backdrop-blur">
-              <span aria-hidden className="h-2 w-2 rounded-full bg-wet" />
-              Untreated
-            </p>
-          </div>
-          <figcaption className="mt-3 text-[0.8rem] text-frost">Illustration, not test data.</figcaption>
-        </figure>
-
-        <div>
-          <h2 className="display display-lg">
+    <section className="band">
+      <div className="wrap">
+        <Reveal>
+          <h2 className="display display-lg max-w-4xl">
             {CLAIMS.problemHeadline.map((line) => (
               <span key={line} className="block">
                 {line}
               </span>
             ))}
           </h2>
-          <ul className="mt-10 divide-y divide-line border-y border-line">
-            {CLAIMS.problemPoints.map((point) => (
-              <li key={point.title} className="grid gap-1 py-5 sm:grid-cols-[13rem_1fr] sm:gap-6">
-                <p className="font-semibold">{point.title}</p>
-                <p className="text-frost">{point.body}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
+        </Reveal>
+
+        <Reveal variant="scale" className="mt-10">
+          <figure>
+            <div className="overflow-hidden rounded-[18px] border border-cyan/30 shadow-[0_30px_90px_-30px_rgb(26_200_244_/_0.45)]">
+              <Image
+                src="/new-des/example-with-comparison-oncup.jpeg"
+                alt="An iced coffee cup split down the middle. Without No Sweat, the left half is covered in condensation, drips and a puddle. With No Sweat, the right half is clear."
+                width={1536}
+                height={1024}
+                sizes="(min-width: 1280px) 1216px, 94vw"
+                className="h-auto w-full"
+              />
+            </div>
+            <figcaption className="mt-3 text-[0.8rem] text-frost">Illustration, not test data.</figcaption>
+          </figure>
+        </Reveal>
+
+        <ul className="mt-10 grid gap-4 md:grid-cols-3">
+          {CLAIMS.problemPoints.map((point, index) => (
+            <Reveal as="li" key={point.title} delay={index * 120} className="glass p-6">
+              <p className="display display-sm">{point.title}</p>
+              <p className="mt-3 text-frost">{point.body}</p>
+            </Reveal>
+          ))}
+        </ul>
       </div>
     </section>
   );

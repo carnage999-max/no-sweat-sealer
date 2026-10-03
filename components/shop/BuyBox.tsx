@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -12,7 +13,6 @@ import { MAX_QUANTITY_PER_LINE } from "@/lib/cart";
 import { formatPrice, getVariant, VARIANTS, type VariantId } from "@/lib/catalog";
 import { SDS_HREF } from "@/content/directions";
 
-import { SIZE_ICONS } from "./SizeStrip";
 
 export function BuyBox({ initialVariantId }: { initialVariantId: VariantId }) {
   const [variantId, setVariantId] = useState<VariantId>(initialVariantId);
@@ -21,7 +21,6 @@ export function BuyBox({ initialVariantId }: { initialVariantId: VariantId }) {
   const [error, setError] = useState<string | null>(null);
 
   const variant = getVariant(variantId)!;
-  const Icon = SIZE_ICONS[variantId];
 
   useEffect(() => {
     track("view_item", {
@@ -67,16 +66,38 @@ export function BuyBox({ initialVariantId }: { initialVariantId: VariantId }) {
   }
 
   return (
-    <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:gap-16">
-      <figure>
-        <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[14px] border border-line bg-[radial-gradient(ellipse_at_50%_35%,#0f3347_0%,var(--color-graphite)_62%)]">
-          <Icon className="h-44 w-44 text-cyan sm:h-56 sm:w-56" strokeWidth={1.1} />
-          <p className="display absolute bottom-5 left-6 text-3xl">{variant.sizeLabel}</p>
+    <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:gap-16">
+      <div>
+        <div className="relative aspect-[4/5] overflow-hidden rounded-[18px] border border-cyan/30 bg-black shadow-[0_30px_90px_-30px_rgb(43_123_255_/_0.55)]">
+          {VARIANTS.map((option) => (
+            <Image
+              key={option.id}
+              src={option.image}
+              alt={`${option.name}, glowing electric blue with ice and water droplets.`}
+              fill
+              priority={option.id === initialVariantId}
+              sizes="(min-width: 1024px) 560px, 94vw"
+              className={`object-cover transition-all duration-700 ${
+                option.id === variantId ? "scale-100 opacity-100" : "scale-105 opacity-0"
+              }`}
+            />
+          ))}
         </div>
-        <figcaption className="mt-3 text-[0.8rem] text-frost">
-          Icon shows relative bottle size. Actual packaging may differ.
-        </figcaption>
-      </figure>
+        <div className="mt-3 grid grid-cols-3 gap-3">
+          {VARIANTS.map((option) => (
+            <button
+              key={option.id}
+              type="button"
+              onClick={() => select(option.id)}
+              aria-label={`Show the ${option.sizeLabel} size`}
+              aria-pressed={variantId === option.id}
+              className="relative aspect-[4/5] overflow-hidden rounded-[12px] border border-white/10 bg-black opacity-70 transition-all hover:opacity-100 aria-pressed:border-cyan aria-pressed:opacity-100"
+            >
+              <Image src={option.image} alt="" fill sizes="120px" className="object-cover" />
+            </button>
+          ))}
+        </div>
+      </div>
 
       <div>
         <h1 className="display display-lg">{variant.name}</h1>

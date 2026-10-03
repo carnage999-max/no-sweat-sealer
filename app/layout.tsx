@@ -44,9 +44,9 @@ export const metadata: Metadata = {
     url: siteUrl,
     images: [
       {
-        url: "/og.jpg",
-        width: 1200,
-        height: 630,
+        url: "/new-des/new-logo.jpeg",
+        width: 1536,
+        height: 1024,
         alt: "No Sweat® logo over a condensation-covered tumbler and ice",
       },
     ],
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "No Sweat® | The end of cup sweat",
     description: SITE.description,
-    images: ["/og.jpg"],
+    images: ["/new-des/new-logo.jpeg"],
   },
 };
 
@@ -69,7 +69,7 @@ const organization = {
   "@type": "Organization",
   name: "No Sweat",
   url: siteUrl,
-  logo: `${siteUrl}/icon.png`,
+  logo: `${siteUrl}/new-des/new-logo.jpeg`,
   address: {
     "@type": "PostalAddress",
     streetAddress: "PO Box 52",

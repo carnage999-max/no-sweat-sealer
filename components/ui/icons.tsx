@@ -137,3 +137,10 @@ export const JugIcon = (p: P) => (
     <path d="M5 14h13" />
   </Icon>
 );
+
+export const SnowflakeIcon = (p: P) => (
+  <Icon {...p}>
+    <path d="M12 2.5v19M4.2 7.2l15.6 9.6M19.8 7.2L4.2 16.8" />
+    <path d="M9.5 4.5L12 7l2.5-2.5M9.5 19.5L12 17l2.5 2.5" />
+  </Icon>
+);

@@ -1,32 +1,29 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Surfaces, darkest to lightest. Graphite family from the spec. */
-  --color-void: #05080d;
-  --color-graphite: #0b1118;
-  --color-panel: #111a23;
-  --color-line: #23313d;
-  --color-line-strong: #34475a;
+  --color-void: #04070c;
+  --color-graphite: #0a1119;
+  --color-panel: #101a24;
+  --color-line: #1f2d3a;
+  --color-line-strong: #31465a;
 
-  /* Light sections */
   --color-paper: #eef6fa;
   --color-ink: #08121a;
   --color-slate: #4d5f6c;
 
-  /* Text on dark */
   --color-ice: #eaf6fb;
-  --color-frost: #9fb3c2;
+  --color-frost: #a3b6c5;
 
-  /* Colour carries meaning: cyan = treated / dry, warm = untreated / wet. */
+  /* The brand's electric blue glow, and the cyan highlight inside it. */
   --color-cyan: #1ac8f4;
+  --color-blue: #2b7bff;
   --color-cyan-deep: #066a8c;
-  --color-wet: #c98a4b;
+  --color-wet: #d19554;
 
   --font-display: var(--font-archivo), "Arial Narrow", Arial, sans-serif;
   --font-body: var(--font-public-sans), system-ui, sans-serif;
 
-  --radius-card: 14px;
-  --radius-pill: 999px;
+  --radius-card: 16px;
 }
 
 :root {
@@ -37,6 +34,13 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 88px;
   background: var(--color-void);
+  overflow-x: clip;
+}
+
+/* Reveals start slightly off to one side; never let that widen the page. */
+section,
+footer {
+  overflow-x: clip;
 }
 
 body {
@@ -69,7 +73,6 @@ body {
 /* Type                                                                */
 /* ------------------------------------------------------------------ */
 
-/* Extended, heavy, slanted: it echoes the chrome wordmark's italic. */
 .display {
   font-family: var(--font-display);
   font-weight: 800;
@@ -78,29 +81,30 @@ body {
   font-variation-settings: "wdth" 118;
   text-transform: uppercase;
   letter-spacing: -0.012em;
-  line-height: 0.95;
+  line-height: 0.96;
   text-wrap: balance;
+  overflow-wrap: anywhere;
 }
 
 .display-xl {
-  font-size: clamp(2.75rem, 8.4vw, 6.75rem);
+  font-size: clamp(2.6rem, 9vw, 6.5rem);
 }
 
 .display-lg {
-  font-size: clamp(2.1rem, 5.2vw, 4.1rem);
+  font-size: clamp(1.95rem, 5.2vw, 4rem);
 }
 
 .display-md {
-  font-size: clamp(1.55rem, 3vw, 2.35rem);
+  font-size: clamp(1.4rem, 3.4vw, 2.3rem);
 }
 
 .display-sm {
-  font-size: clamp(1.15rem, 1.8vw, 1.4rem);
-  line-height: 1.05;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  line-height: 1.08;
 }
 
 .lede {
-  font-size: clamp(1.125rem, 1.6vw, 1.3rem);
+  font-size: clamp(1.05rem, 1.6vw, 1.28rem);
   line-height: 1.6;
   max-width: 56ch;
 }
@@ -113,6 +117,33 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
+/* Brushed chrome with a slow light sweep, echoing the logo lettering. */
+.chrome-text {
+  background: linear-gradient(
+    100deg,
+    #c3d3de 0%,
+    #ffffff 24%,
+    #d7e4ec 40%,
+    #ffffff 55%,
+    #b4c7d4 74%,
+    #f3fbff 100%
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: chrome-sweep 7s ease-in-out infinite alternate;
+}
+
+@keyframes chrome-sweep {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
+
 /* ------------------------------------------------------------------ */
 /* Layout                                                              */
 /* ------------------------------------------------------------------ */
@@ -121,7 +152,7 @@ body {
   width: 100%;
   max-width: 1280px;
   margin-inline: auto;
-  padding-inline: 1.25rem;
+  padding-inline: 1.1rem;
 }
 
 @media (min-width: 640px) {
@@ -131,46 +162,209 @@ body {
 }
 
 .band {
-  padding-block: clamp(4rem, 9vw, 8rem);
+  padding-block: clamp(3.5rem, 9vw, 8rem);
 }
 
 /* ------------------------------------------------------------------ */
-/* Hero wipe: the single orchestrated moment                           */
-/*                                                                     */
-/* A cyan line sweeps across the split cup once, lifting a veil off    */
-/* the treated half. Pure CSS, runs once, skipped for reduced motion.  */
+/* Surfaces and glow                                                   */
 /* ------------------------------------------------------------------ */
 
-.wipe-veil {
-  transform-origin: right center;
-  animation: wipe-veil 1.5s cubic-bezier(0.65, 0, 0.25, 1) 0.45s both;
+.glass {
+  background: linear-gradient(160deg, rgb(255 255 255 / 0.07), rgb(255 255 255 / 0.02));
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-radius: var(--radius-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s,
+    transform 0.3s;
 }
 
-.wipe-line {
-  animation: wipe-line 1.5s cubic-bezier(0.65, 0, 0.25, 1) 0.45s both;
+.glass:hover {
+  border-color: rgb(26 200 244 / 0.55);
+  box-shadow:
+    0 0 0 1px rgb(26 200 244 / 0.25),
+    0 24px 60px -24px rgb(26 200 244 / 0.5);
 }
 
-@keyframes wipe-veil {
-  from {
-    transform: scaleX(1);
-  }
+/* Slow drifting colour behind a hero. */
+.aurora::before,
+.aurora::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.aurora::before {
+  width: 46rem;
+  height: 46rem;
+  left: -12rem;
+  top: -14rem;
+  background: radial-gradient(circle, rgb(43 123 255 / 0.55), transparent 65%);
+  animation: aurora-a 16s ease-in-out infinite alternate;
+}
+
+.aurora::after {
+  width: 40rem;
+  height: 40rem;
+  right: -10rem;
+  bottom: -12rem;
+  background: radial-gradient(circle, rgb(26 200 244 / 0.45), transparent 65%);
+  animation: aurora-b 19s ease-in-out infinite alternate;
+}
+
+@keyframes aurora-a {
   to {
-    transform: scaleX(0);
+    transform: translate3d(8rem, 5rem, 0) scale(1.15);
   }
 }
 
-@keyframes wipe-line {
+@keyframes aurora-b {
+  to {
+    transform: translate3d(-7rem, -4rem, 0) scale(1.2);
+  }
+}
+
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+
+/* Droplets rising behind the hero. Values are fixed, never random, so the
+   server and client markup always match. */
+.droplet {
+  position: absolute;
+  bottom: -20px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 28%, #ffffff, rgb(26 200 244 / 0.5) 42%, rgb(43 123 255 / 0.12) 74%);
+  box-shadow: 0 0 12px rgb(26 200 244 / 0.45);
+  opacity: 0;
+  animation: rise linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rise {
   0% {
-    left: 50%;
-    opacity: 1;
-  }
-  88% {
-    opacity: 1;
-  }
-  100% {
-    left: 100%;
+    transform: translate3d(0, 0, 0) scale(0.6);
     opacity: 0;
   }
+  12% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: translate3d(var(--drift, 0px), -105vh, 0) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Headline lines slide up out of a mask on load. */
+.line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.line-up {
+  display: block;
+  animation: line-up 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes line-up {
+  from {
+    transform: translate3d(0, 110%, 0);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Marquee                                                             */
+/* ------------------------------------------------------------------ */
+
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Scroll reveal and page transition                                   */
+/* ------------------------------------------------------------------ */
+
+[data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+
+[data-reveal="pending"] {
+  opacity: 0;
+  transform: translate3d(0, 32px, 0);
+}
+
+[data-reveal="pending"][data-variant="scale"] {
+  transform: scale(0.93);
+}
+
+[data-reveal="pending"][data-variant="left"] {
+  transform: translate3d(-24px, 0, 0);
+}
+
+[data-reveal="pending"][data-variant="right"] {
+  transform: translate3d(24px, 0, 0);
+}
+
+[data-reveal="shown"] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.85s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.page-in {
+  animation: page-in 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+}
+
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 60;
+  height: 3px;
+  transform-origin: left center;
+  transform: scaleX(0);
+  background: linear-gradient(90deg, var(--color-blue), var(--color-cyan));
+  box-shadow: 0 0 14px rgb(26 200 244 / 0.7);
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -178,10 +372,37 @@ body {
     scroll-behavior: auto;
   }
 
-  .wipe-veil,
-  .wipe-line {
+  .aurora::before,
+  .aurora::after,
+  .float,
+  .droplet,
+  .chrome-text,
+  .line-up,
+  .page-in {
     animation: none;
+  }
+
+  .droplet {
     display: none;
+  }
+
+  .chrome-text {
+    background-position: 50% 50%;
+  }
+
+  .marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: auto;
+  }
+
+  .marquee-dup {
+    display: none;
+  }
+
+  [data-reveal="shown"] {
+    transition: none;
   }
 
   * {
@@ -202,9 +423,8 @@ body {
   font-weight: 800;
   font-stretch: 112%;
   font-variation-settings: "wdth" 112;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   line-height: 1.15;
-  letter-spacing: -0.005em;
   margin-top: 2.75rem;
   margin-bottom: 0.75rem;
 }
@@ -241,7 +461,6 @@ body {
   text-underline-offset: 3px;
 }
 
-/* Details/summary accordion marker */
 details > summary {
   list-style: none;
 }
@@ -279,16 +498,16 @@ details > summary::-webkit-details-marker {
 }
 
 .drawer::backdrop {
-  background: rgb(5 8 13 / 0.72);
-  backdrop-filter: blur(3px);
+  background: rgb(4 7 12 / 0.75);
+  backdrop-filter: blur(4px);
 }
 
 .drawer[open][data-side="right"] {
-  animation: drawer-in-right 0.26s cubic-bezier(0.2, 0.8, 0.2, 1);
+  animation: drawer-in-right 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .drawer[open][data-side="left"] {
-  animation: drawer-in-left 0.26s cubic-bezier(0.2, 0.8, 0.2, 1);
+  animation: drawer-in-left 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 @keyframes drawer-in-right {

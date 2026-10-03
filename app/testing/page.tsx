@@ -55,7 +55,7 @@ export default function TestingPage() {
               ))}
             </div>
           ) : (
-            <div className="rounded-[14px] border border-line bg-graphite p-8 sm:p-10">
+            <div className="glass p-8 sm:p-10">
               <p className="display display-md">No published tests yet.</p>
               <p className="mt-4 max-w-2xl text-frost">
                 We publish a test once its conditions, formula revision and results are recorded. Check back here, or

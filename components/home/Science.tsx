@@ -1,15 +1,16 @@
 import Link from "next/link";
 
 import { btn } from "@/components/ui/button";
+import { Reveal } from "@/components/ui/Reveal";
 import { CLAIMS } from "@/content/claims";
 
 import { ScienceDiagram } from "./ScienceDiagram";
 
 export function Science() {
   return (
-    <section className="band border-t border-line bg-graphite">
+    <section className="band border-y border-white/10 bg-graphite">
       <div className="wrap grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-16">
-        <div>
+        <Reveal variant="left">
           <h2 className="display display-lg">
             {CLAIMS.scienceHeadline.map((line) => (
               <span key={line} className="block">
@@ -27,8 +28,10 @@ export function Science() {
           <Link href="/testing" className={`${btn("ghost")} mt-9`}>
             See our testing
           </Link>
-        </div>
-        <ScienceDiagram />
+        </Reveal>
+        <Reveal variant="right">
+          <ScienceDiagram />
+        </Reveal>
       </div>
     </section>
   );

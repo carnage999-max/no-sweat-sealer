@@ -24,7 +24,7 @@ export function TestCard({ test }: { test: TestRecord }) {
   const { media } = test;
 
   return (
-    <article className="rounded-[14px] border border-line bg-graphite p-5 sm:p-8">
+    <article className="glass p-5 sm:p-8">
       <header className="flex flex-wrap items-baseline justify-between gap-3">
         <div>
           <h3 className="display display-md">Test {test.id}</h3>

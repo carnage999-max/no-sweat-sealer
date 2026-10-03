@@ -2,28 +2,22 @@ import Image from "next/image";
 import Link from "next/link";
 
 /**
- * The droplet from the brand artwork plus a live-type wordmark. The full
- * chrome artwork is far too detailed to read at header size, so it is used
- * large elsewhere (final call to action, social image).
+ * The brand logo, used exactly as supplied. It sits on black, so the screen
+ * blend mode lets the page's own dark background show through it.
  */
-export function Logo({ className = "" }: { className?: string }) {
+export function Logo({ className = "", height = 44 }: { className?: string; height?: number }) {
   return (
-    <Link
-      href="/"
-      aria-label="No Sweat, home"
-      className={`flex items-center gap-2.5 ${className}`}
-    >
+    <Link href="/" aria-label="No Sweat, home" className={`block shrink-0 ${className}`}>
       <Image
-        src="/images/drop.png"
-        alt=""
-        width={40}
-        height={40}
-        className="h-9 w-9 rounded-[9px]"
+        src="/new-des/new-logo.jpeg"
+        alt="No Sweat®"
+        width={1536}
+        height={1024}
         priority
+        sizes={`${Math.round(height * 1.5)}px`}
+        style={{ height, width: "auto" }}
+        className="rounded-md"
       />
-      <span className="display text-[1.15rem] leading-none">
-        No Sweat<sup className="ml-0.5 align-super text-[0.55em]">®</sup>
-      </span>
     </Link>
   );
 }
