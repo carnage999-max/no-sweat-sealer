@@ -1,35 +1,522 @@
 @import "tailwindcss";
 
-/* Define utility classes to apply the imported fonts. Tailwind will
-   respect these classes when used in JSX. */
-.font-montserrat {
-  font-family: 'Montserrat', sans-serif;
-}
-.font-opensans {
-  font-family: 'Open Sans', sans-serif;
+@theme inline {
+  --color-void: #04070c;
+  --color-graphite: #0a1119;
+  --color-panel: #101a24;
+  --color-line: #1f2d3a;
+  --color-line-strong: #31465a;
+
+  --color-paper: #eef6fa;
+  --color-ink: #08121a;
+  --color-slate: #4d5f6c;
+
+  --color-ice: #eaf6fb;
+  --color-frost: #a3b6c5;
+
+  /* The brand's electric blue glow, and the cyan highlight inside it. */
+  --color-cyan: #1ac8f4;
+  --color-blue: #2b7bff;
+  --color-cyan-deep: #066a8c;
+  --color-wet: #d19554;
+
+  --font-display: var(--font-archivo), "Arial Narrow", Arial, sans-serif;
+  --font-body: var(--font-public-sans), system-ui, sans-serif;
+
+  --radius-card: 16px;
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+  background: var(--color-void);
+  overflow-x: hidden;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Reveals start slightly off to one side; never let that widen the page. */
+section,
+footer {
+  overflow-x: clip;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-void);
+  color: var(--color-ice);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-cyan);
+  color: var(--color-void);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.on-paper :focus-visible {
+  outline-color: var(--color-cyan-deep);
+}
+
+/* ------------------------------------------------------------------ */
+/* Type                                                                */
+/* ------------------------------------------------------------------ */
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-style: italic;
+  font-stretch: 118%;
+  font-variation-settings: "wdth" 118;
+  text-transform: uppercase;
+  letter-spacing: -0.012em;
+  line-height: 0.96;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  hyphens: manual;
+}
+
+.display-xl {
+  font-size: clamp(2.6rem, 9vw, 6.5rem);
+}
+
+.display-lg {
+  font-size: clamp(1.7rem, 5.2vw, 4rem);
+}
+
+.display-md {
+  font-size: clamp(1.4rem, 3.4vw, 2.3rem);
+}
+
+.display-sm {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  line-height: 1.08;
+}
+
+.lede {
+  font-size: clamp(1.05rem, 1.6vw, 1.28rem);
+  line-height: 1.6;
+  max-width: 56ch;
+}
+
+.measure {
+  max-width: 62ch;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Brushed chrome with a slow light sweep, echoing the logo lettering. */
+.chrome-text {
+  background: linear-gradient(
+    100deg,
+    #c3d3de 0%,
+    #ffffff 24%,
+    #d7e4ec 40%,
+    #ffffff 55%,
+    #b4c7d4 74%,
+    #f3fbff 100%
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: chrome-sweep 7s ease-in-out infinite alternate;
+}
+
+@keyframes chrome-sweep {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Layout                                                              */
+/* ------------------------------------------------------------------ */
+
+.wrap {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 1.1rem;
+}
+
+@media (min-width: 640px) {
+  .wrap {
+    padding-inline: 2rem;
+  }
+}
+
+.band {
+  padding-block: clamp(3.5rem, 9vw, 8rem);
+}
+
+/* ------------------------------------------------------------------ */
+/* Surfaces and glow                                                   */
+/* ------------------------------------------------------------------ */
+
+.glass {
+  background: linear-gradient(160deg, rgb(255 255 255 / 0.07), rgb(255 255 255 / 0.02));
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-radius: var(--radius-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s,
+    transform 0.3s;
+}
+
+.glass:hover {
+  border-color: rgb(26 200 244 / 0.55);
+  box-shadow:
+    0 0 0 1px rgb(26 200 244 / 0.25),
+    0 24px 60px -24px rgb(26 200 244 / 0.5);
+}
+
+/* Slow drifting colour behind a hero. */
+.aurora::before,
+.aurora::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.aurora::before {
+  width: 46rem;
+  height: 46rem;
+  left: -12rem;
+  top: -14rem;
+  background: radial-gradient(circle, rgb(43 123 255 / 0.55), transparent 65%);
+  animation: aurora-a 16s ease-in-out infinite alternate;
+}
+
+.aurora::after {
+  width: 40rem;
+  height: 40rem;
+  right: -10rem;
+  bottom: -12rem;
+  background: radial-gradient(circle, rgb(26 200 244 / 0.45), transparent 65%);
+  animation: aurora-b 19s ease-in-out infinite alternate;
+}
+
+@keyframes aurora-a {
+  to {
+    transform: translate3d(8rem, 5rem, 0) scale(1.15);
+  }
+}
+
+@keyframes aurora-b {
+  to {
+    transform: translate3d(-7rem, -4rem, 0) scale(1.2);
+  }
+}
+
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+
+/* Droplets rising behind the hero. Values are fixed, never random, so the
+   server and client markup always match. */
+.droplet {
+  position: absolute;
+  bottom: -20px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 28%, #ffffff, rgb(26 200 244 / 0.5) 42%, rgb(43 123 255 / 0.12) 74%);
+  box-shadow: 0 0 12px rgb(26 200 244 / 0.45);
+  opacity: 0;
+  animation: rise linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rise {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.6);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: translate3d(var(--drift, 0px), -105vh, 0) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Headline lines slide up out of a mask on load. */
+.line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.line-up {
+  display: block;
+  animation: line-up 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes line-up {
+  from {
+    transform: translate3d(0, 110%, 0);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Marquee                                                             */
+/* ------------------------------------------------------------------ */
+
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Scroll reveal and page transition                                   */
+/* ------------------------------------------------------------------ */
+
+[data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+
+[data-reveal="pending"] {
+  opacity: 0;
+  transform: translate3d(0, 32px, 0);
+}
+
+[data-reveal="pending"][data-variant="scale"] {
+  transform: scale(0.93);
+}
+
+[data-reveal="shown"] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.85s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.page-in {
+  animation: page-in 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+}
+
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 60;
+  height: 3px;
+  transform-origin: left center;
+  transform: scaleX(0);
+  background: linear-gradient(90deg, var(--color-blue), var(--color-cyan));
+  box-shadow: 0 0 14px rgb(26 200 244 / 0.7);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .aurora::before,
+  .aurora::after,
+  .float,
+  .droplet,
+  .chrome-text,
+  .line-up,
+  .page-in {
+    animation: none;
+  }
+
+  .droplet {
+    display: none;
+  }
+
+  .chrome-text {
+    background-position: 50% 50%;
+  }
+
+  .marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: auto;
+  }
+
+  .marquee-dup {
+    display: none;
+  }
+
+  [data-reveal="shown"] {
+    transition: none;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Prose for policy and long-form pages                                */
+/* ------------------------------------------------------------------ */
+
+.prose-ns {
+  max-width: 68ch;
+}
+
+.prose-ns h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 112%;
+  font-variation-settings: "wdth" 112;
+  font-size: 1.4rem;
+  line-height: 1.15;
+  margin-top: 2.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-ns h3 {
+  font-weight: 700;
+  font-size: 1.125rem;
+  margin-top: 1.75rem;
+  margin-bottom: 0.4rem;
+}
+
+.prose-ns p,
+.prose-ns ul,
+.prose-ns ol {
+  margin-top: 0.85rem;
+}
+
+.prose-ns ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+}
+
+.prose-ns ol {
+  list-style: decimal;
+  padding-left: 1.4rem;
+}
+
+.prose-ns li + li {
+  margin-top: 0.4rem;
+}
+
+.prose-ns a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+details > summary {
+  list-style: none;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* Drawer (native <dialog>)                                            */
+/* ------------------------------------------------------------------ */
+
+.drawer {
+  position: fixed;
+  inset-block: 0;
+  margin: 0;
+  padding: 0;
+  height: 100dvh;
+  max-height: none;
+  width: min(100vw, 26rem);
+  border: 0;
+  background: var(--color-graphite);
+  color: var(--color-ice);
+  box-shadow: -24px 0 64px rgb(0 0 0 / 0.5);
+}
+
+.drawer[data-side="right"] {
+  right: 0;
+  left: auto;
+}
+
+.drawer[data-side="left"] {
+  left: 0;
+  right: auto;
+}
+
+.drawer::backdrop {
+  background: rgb(4 7 12 / 0.75);
+  backdrop-filter: blur(4px);
+}
+
+.drawer[open][data-side="right"] {
+  animation: drawer-in-right 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.drawer[open][data-side="left"] {
+  animation: drawer-in-left 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes drawer-in-right {
+  from {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes drawer-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer[open] {
+    animation: none;
+  }
 }

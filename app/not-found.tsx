@@ -1,32 +1,23 @@
-import Link from 'next/link';
-import { COLORS, FONTS, BUTTON_CLASSES } from '@/constants/constants';
+import Link from "next/link";
+
+import { btn } from "@/components/ui/button";
 
 export default function NotFound() {
-    return (
-        <section className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#F7FBFD] to-[#D9E1E5] p-8">
-            <div className="text-center max-w-lg mx-auto">
-                <h1
-                    className={`text-6xl md:text-8xl font-extrabold mb-4 ${FONTS.heading}`}
-                    style={{ color: COLORS.jetBlack }}
-                >
-                    404
-                </h1>
-                <h2
-                    className={`text-2xl md:text-3xl mb-4 ${FONTS.heading}`}
-                    style={{ color: COLORS.jetBlack }}
-                >
-                    Page Not Found
-                </h2>
-                <p
-                    className={`${FONTS.body} mb-8`}
-                    style={{ color: COLORS.jetBlack }}
-                >
-                    Oops! It seems you've ventured off the beaten path. The page you're looking for doesn't exist or has been moved.
-                </p>
-                <Link href="/" className={BUTTON_CLASSES}>
-                    Return Home
-                </Link>
-            </div>
-        </section>
-    );
+  return (
+    <section className="band">
+      <div className="wrap max-w-2xl">
+        <h1 className="display display-xl">404</h1>
+        <p className="display display-md mt-4">That page isn&rsquo;t here.</p>
+        <p className="mt-4 text-frost">It may have moved, or the link may be wrong.</p>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Link href="/" className={btn("primary", "lg")}>
+            Back to home
+          </Link>
+          <Link href="/shop" className={btn("ghost", "lg")}>
+            Shop No Sweat
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
 }
