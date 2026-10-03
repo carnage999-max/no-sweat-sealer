@@ -83,7 +83,8 @@ body {
   letter-spacing: -0.012em;
   line-height: 0.96;
   text-wrap: balance;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  hyphens: manual;
 }
 
 .display-xl {
@@ -91,7 +92,7 @@ body {
 }
 
 .display-lg {
-  font-size: clamp(1.95rem, 5.2vw, 4rem);
+  font-size: clamp(1.7rem, 5.2vw, 4rem);
 }
 
 .display-md {

@@ -47,3 +47,20 @@ export const FOOTER_LINKS = {
     { href: "/terms", label: "Terms" },
   ],
 } as const;
+
+/**
+ * Placeholder destinations: the client has not supplied profile URLs yet.
+ * Replace each href before launch.
+ */
+export const SOCIALS = [
+  { key: "youtube", name: "YouTube", href: "https://www.youtube.com" },
+  { key: "rumble", name: "Rumble", href: "https://rumble.com" },
+  { key: "liberty", name: "Liberty Social", href: "https://libertysocial.com" },
+  { key: "facebook", name: "Facebook", href: "https://www.facebook.com" },
+  { key: "x", name: "X", href: "https://x.com" },
+  { key: "instagram", name: "Instagram", href: "https://www.instagram.com" },
+  { key: "tiktok", name: "TikTok", href: "https://www.tiktok.com" },
+  { key: "yelp", name: "Yelp", href: "https://www.yelp.com" },
+  { key: "truth", name: "Truth Social", href: "https://truthsocial.com" },
+  { key: "threads", name: "Threads", href: "https://www.threads.net" },
+] as const;

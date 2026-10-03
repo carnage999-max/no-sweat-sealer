@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { ContactForm } from "@/components/forms/ContactForm";
+import { SocialRow } from "@/components/site/SocialRow";
 import { PageIntro } from "@/components/ui/PageIntro";
 import { SITE } from "@/content/site";
 
@@ -44,6 +45,8 @@ export default function ContactPage() {
                 </dd>
               </div>
             </dl>
+            <h2 className="display display-md mt-12">Follow along</h2>
+            <SocialRow className="mt-5" />
           </div>
         </div>
       </section>

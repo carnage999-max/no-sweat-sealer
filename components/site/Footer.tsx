@@ -3,6 +3,7 @@ import Link from "next/link";
 import { FOOTER_LINKS, SITE } from "@/content/site";
 
 import { Logo } from "./Logo";
+import { SocialRow } from "./SocialRow";
 
 function Column({
   title,
@@ -59,6 +60,7 @@ export function Footer() {
               {SITE.contact.phone}
             </a>
           </address>
+          <SocialRow className="mt-7" />
         </div>
         <Column title="Shop" links={FOOTER_LINKS.shop} />
         <Column title="Learn" links={FOOTER_LINKS.learn} />
