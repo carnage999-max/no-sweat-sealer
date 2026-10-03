@@ -2,6 +2,7 @@ import { Applications } from "@/components/home/Applications";
 import { BeforeAfter } from "@/components/home/BeforeAfter";
 import { BuySection } from "@/components/home/BuySection";
 import { CommercialBand } from "@/components/home/CommercialBand";
+import { ContactSection } from "@/components/home/ContactSection";
 import { FaqSection } from "@/components/home/FaqSection";
 import { FinalCta } from "@/components/home/FinalCta";
 import { Hero } from "@/components/home/Hero";
@@ -28,6 +29,7 @@ export default function HomePage() {
       <Science />
       <CommercialBand video={resolveVideo("commercial-hero")} />
       <FaqSection />
+      <ContactSection />
       <FinalCta />
     </>
   );

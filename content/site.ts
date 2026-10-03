@@ -22,6 +22,7 @@ export const NAV = [
   { href: "/shop", label: "Shop" },
   { href: "/commercial", label: "Commercial" },
   { href: "/faq", label: "FAQ" },
+  { href: "/contact", label: "Contact" },
 ] as const;
 
 export const FOOTER_LINKS = {
