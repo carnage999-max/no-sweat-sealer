@@ -10,7 +10,7 @@ export function Science() {
   return (
     <section className="band border-y border-white/10 bg-graphite">
       <div className="wrap grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-16">
-        <Reveal variant="left">
+        <Reveal>
           <h2 className="display display-lg">
             {CLAIMS.scienceHeadline.map((line) => (
               <span key={line} className="block">
@@ -29,7 +29,7 @@ export function Science() {
             See our testing
           </Link>
         </Reveal>
-        <Reveal variant="right">
+        <Reveal>
           <ScienceDiagram />
         </Reveal>
       </div>

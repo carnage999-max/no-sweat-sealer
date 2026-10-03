@@ -73,7 +73,7 @@ export function BuyBox({ initialVariantId }: { initialVariantId: VariantId }) {
             <Image
               key={option.id}
               src={option.image}
-              alt={`${option.name}, glowing electric blue with ice and water droplets.`}
+              alt={option.id === variantId ? `${option.name}, glowing electric blue with ice and water droplets.` : ""}
               fill
               priority={option.id === initialVariantId}
               sizes="(min-width: 1024px) 560px, 94vw"
@@ -81,20 +81,6 @@ export function BuyBox({ initialVariantId }: { initialVariantId: VariantId }) {
                 option.id === variantId ? "scale-100 opacity-100" : "scale-105 opacity-0"
               }`}
             />
-          ))}
-        </div>
-        <div className="mt-3 grid grid-cols-3 gap-3">
-          {VARIANTS.map((option) => (
-            <button
-              key={option.id}
-              type="button"
-              onClick={() => select(option.id)}
-              aria-label={`Show the ${option.sizeLabel} size`}
-              aria-pressed={variantId === option.id}
-              className="relative aspect-[4/5] overflow-hidden rounded-[12px] border border-white/10 bg-black opacity-70 transition-all hover:opacity-100 aria-pressed:border-cyan aria-pressed:opacity-100"
-            >
-              <Image src={option.image} alt="" fill sizes="120px" className="object-cover" />
-            </button>
           ))}
         </div>
       </div>

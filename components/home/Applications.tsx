@@ -6,18 +6,21 @@ import { FLAGS } from "@/content/claims";
 
 const GALLERY = [
   {
+    title: "Mirrors and bathroom glass",
     src: "/new-des/example-on-bathroom-mirror.jpeg",
     alt: "A bathroom mirror, fogged on the left and clear on the right, with the No Sweat logo.",
     width: 1536,
     height: 1024,
   },
   {
+    title: "Windshields and everyday glass",
     src: "/new-des/example-use-on-car-and-daily-life.jpeg",
     alt: "A car windshield, fogged on the left and clear on the right, with icons for everyday uses.",
     width: 1672,
     height: 941,
   },
   {
+    title: "Safety and response gear",
     src: "/new-des/example-use-for-law-enforcement.jpeg",
     alt: "A safety-response helmet visor and side mirrors, fogged on the left and clear on the right.",
     width: 1672,
@@ -62,25 +65,24 @@ export function Applications() {
 
         {FLAGS.showEvaluatingApplications ? (
           <>
-            <div className="mt-6 grid items-start gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {GALLERY.map((image, index) => (
-                <Reveal key={image.src} delay={index * 120}>
-                  <div className="group overflow-hidden rounded-[16px] border border-white/10 transition-all duration-300 hover:border-cyan/60 hover:shadow-[0_24px_60px_-24px_rgb(26_200_244_/_0.5)]">
+            <div className="mt-20 space-y-16 lg:space-y-24">
+              {GALLERY.map((image) => (
+                <Reveal key={image.src}>
+                  <h3 className="display display-md">{image.title}</h3>
+                  <p className="mt-2 text-frost">Under evaluation. Not yet tested.</p>
+                  <div className="mt-6 overflow-hidden rounded-[18px] border border-cyan/30 shadow-[0_30px_90px_-30px_rgb(43_123_255_/_0.5)]">
                     <Image
                       src={image.src}
                       alt={image.alt}
                       width={image.width}
                       height={image.height}
-                      sizes="(min-width: 1024px) 400px, (min-width: 768px) 46vw, 94vw"
-                      className="h-auto w-full transition-transform duration-700 group-hover:scale-[1.03]"
+                      sizes="(min-width: 1280px) 1216px, 94vw"
+                      className="h-auto w-full"
                     />
                   </div>
                 </Reveal>
               ))}
             </div>
-            <p className="mt-5 max-w-3xl text-[0.9rem] text-frost">
-              Concept imagery. Surfaces beyond drinkware are under evaluation and have not been tested.
-            </p>
           </>
         ) : null}
       </div>

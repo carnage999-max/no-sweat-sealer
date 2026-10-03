@@ -115,7 +115,7 @@ type RevealProps = {
   delay?: number;
   id?: string;
   /** Entrance style. */
-  variant?: "up" | "scale" | "left" | "right";
+  variant?: "up" | "scale";
 };
 
 /**

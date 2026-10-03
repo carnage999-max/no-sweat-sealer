@@ -34,7 +34,7 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 88px;
   background: var(--color-void);
-  overflow-x: clip;
+  overflow-x: hidden;
 }
 
 /* Reveals start slightly off to one side; never let that widen the page. */
@@ -326,14 +326,6 @@ body {
 
 [data-reveal="pending"][data-variant="scale"] {
   transform: scale(0.93);
-}
-
-[data-reveal="pending"][data-variant="left"] {
-  transform: translate3d(-24px, 0, 0);
-}
-
-[data-reveal="pending"][data-variant="right"] {
-  transform: translate3d(24px, 0, 0);
 }
 
 [data-reveal="shown"] {

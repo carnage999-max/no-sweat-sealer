@@ -21,7 +21,7 @@ export function CommercialBand({ video }: { video: VideoMedia | null }) {
         </div>
       ) : null}
       <div className="wrap grid items-center gap-10 py-16 sm:py-24 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
-        <Reveal variant="left">
+        <Reveal>
           <h2 className="display" style={{ fontSize: "clamp(2.1rem, 6vw, 4.6rem)" }}>
             {CLAIMS.commercialHeadline.map((line) => (
               <span key={line} className="block">
@@ -34,7 +34,7 @@ export function CommercialBand({ video }: { video: VideoMedia | null }) {
             Commercial &amp; wholesale
           </Link>
         </Reveal>
-        <Reveal variant="right" className="mx-auto w-full max-w-[420px]">
+        <Reveal className="mx-auto w-full max-w-[420px]">
           <TiltCard className="overflow-hidden rounded-[18px] border border-cyan/30 shadow-[0_30px_90px_-30px_rgb(26_200_244_/_0.5)]">
             <Image
               src="/product/1-gallon.png"

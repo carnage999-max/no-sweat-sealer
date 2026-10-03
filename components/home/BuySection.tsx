@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { SizeStrip } from "@/components/shop/SizeStrip";
+import { ProductShowcase } from "@/components/shop/ProductShowcase";
 import { Reveal } from "@/components/ui/Reveal";
 
 export function BuySection() {
@@ -16,7 +16,7 @@ export function BuySection() {
           <p className="max-w-sm text-frost">Directions and the Safety Data Sheet are on every product page.</p>
         </Reveal>
         <div className="mt-10">
-          <SizeStrip />
+          <ProductShowcase />
         </div>
         <p className="mt-8 text-frost">
           Buying for a café, bar or event?{" "}

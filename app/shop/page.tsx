@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { SizeStrip } from "@/components/shop/SizeStrip";
+import { SizeRows } from "@/components/shop/SizeRows";
 import { PageIntro } from "@/components/ui/PageIntro";
 import { SDS_HREF } from "@/content/directions";
 
@@ -20,7 +20,7 @@ export default function ShopPage() {
       />
       <section className="band">
         <div className="wrap">
-          <SizeStrip />
+          <SizeRows />
           <div className="mt-12 grid gap-8 border-t border-line pt-10 md:grid-cols-2">
             <p className="measure text-frost">
               Every product page has the directions and the Safety Data Sheet next to the buy button, so you can read
