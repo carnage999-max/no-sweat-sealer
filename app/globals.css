@@ -1,35 +1,310 @@
 @import "tailwindcss";
 
-/* Define utility classes to apply the imported fonts. Tailwind will
-   respect these classes when used in JSX. */
-.font-montserrat {
-  font-family: 'Montserrat', sans-serif;
-}
-.font-opensans {
-  font-family: 'Open Sans', sans-serif;
+@theme inline {
+  /* Surfaces, darkest to lightest. Graphite family from the spec. */
+  --color-void: #05080d;
+  --color-graphite: #0b1118;
+  --color-panel: #111a23;
+  --color-line: #23313d;
+  --color-line-strong: #34475a;
+
+  /* Light sections */
+  --color-paper: #eef6fa;
+  --color-ink: #08121a;
+  --color-slate: #4d5f6c;
+
+  /* Text on dark */
+  --color-ice: #eaf6fb;
+  --color-frost: #9fb3c2;
+
+  /* Colour carries meaning: cyan = treated / dry, warm = untreated / wet. */
+  --color-cyan: #1ac8f4;
+  --color-cyan-deep: #066a8c;
+  --color-wet: #c98a4b;
+
+  --font-display: var(--font-archivo), "Arial Narrow", Arial, sans-serif;
+  --font-body: var(--font-public-sans), system-ui, sans-serif;
+
+  --radius-card: 14px;
+  --radius-pill: 999px;
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+  background: var(--color-void);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-void);
+  color: var(--color-ice);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-cyan);
+  color: var(--color-void);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.on-paper :focus-visible {
+  outline-color: var(--color-cyan-deep);
+}
+
+/* ------------------------------------------------------------------ */
+/* Type                                                                */
+/* ------------------------------------------------------------------ */
+
+/* Extended, heavy, slanted: it echoes the chrome wordmark's italic. */
+.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-style: italic;
+  font-stretch: 118%;
+  font-variation-settings: "wdth" 118;
+  text-transform: uppercase;
+  letter-spacing: -0.012em;
+  line-height: 0.95;
+  text-wrap: balance;
+}
+
+.display-xl {
+  font-size: clamp(2.75rem, 8.4vw, 6.75rem);
+}
+
+.display-lg {
+  font-size: clamp(2.1rem, 5.2vw, 4.1rem);
+}
+
+.display-md {
+  font-size: clamp(1.55rem, 3vw, 2.35rem);
+}
+
+.display-sm {
+  font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+  line-height: 1.05;
+}
+
+.lede {
+  font-size: clamp(1.125rem, 1.6vw, 1.3rem);
+  line-height: 1.6;
+  max-width: 56ch;
+}
+
+.measure {
+  max-width: 62ch;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------------------------------------------ */
+/* Layout                                                              */
+/* ------------------------------------------------------------------ */
+
+.wrap {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .wrap {
+    padding-inline: 2rem;
+  }
+}
+
+.band {
+  padding-block: clamp(4rem, 9vw, 8rem);
+}
+
+/* ------------------------------------------------------------------ */
+/* Hero wipe: the single orchestrated moment                           */
+/*                                                                     */
+/* A cyan line sweeps across the split cup once, lifting a veil off    */
+/* the treated half. Pure CSS, runs once, skipped for reduced motion.  */
+/* ------------------------------------------------------------------ */
+
+.wipe-veil {
+  transform-origin: right center;
+  animation: wipe-veil 1.5s cubic-bezier(0.65, 0, 0.25, 1) 0.45s both;
+}
+
+.wipe-line {
+  animation: wipe-line 1.5s cubic-bezier(0.65, 0, 0.25, 1) 0.45s both;
+}
+
+@keyframes wipe-veil {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes wipe-line {
+  0% {
+    left: 50%;
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .wipe-veil,
+  .wipe-line {
+    animation: none;
+    display: none;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Prose for policy and long-form pages                                */
+/* ------------------------------------------------------------------ */
+
+.prose-ns {
+  max-width: 68ch;
+}
+
+.prose-ns h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 112%;
+  font-variation-settings: "wdth" 112;
+  font-size: 1.5rem;
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+  margin-top: 2.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-ns h3 {
+  font-weight: 700;
+  font-size: 1.125rem;
+  margin-top: 1.75rem;
+  margin-bottom: 0.4rem;
+}
+
+.prose-ns p,
+.prose-ns ul,
+.prose-ns ol {
+  margin-top: 0.85rem;
+}
+
+.prose-ns ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+}
+
+.prose-ns ol {
+  list-style: decimal;
+  padding-left: 1.4rem;
+}
+
+.prose-ns li + li {
+  margin-top: 0.4rem;
+}
+
+.prose-ns a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Details/summary accordion marker */
+details > summary {
+  list-style: none;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* Drawer (native <dialog>)                                            */
+/* ------------------------------------------------------------------ */
+
+.drawer {
+  position: fixed;
+  inset-block: 0;
+  margin: 0;
+  padding: 0;
+  height: 100dvh;
+  max-height: none;
+  width: min(100vw, 26rem);
+  border: 0;
+  background: var(--color-graphite);
+  color: var(--color-ice);
+  box-shadow: -24px 0 64px rgb(0 0 0 / 0.5);
+}
+
+.drawer[data-side="right"] {
+  right: 0;
+  left: auto;
+}
+
+.drawer[data-side="left"] {
+  left: 0;
+  right: auto;
+}
+
+.drawer::backdrop {
+  background: rgb(5 8 13 / 0.72);
+  backdrop-filter: blur(3px);
+}
+
+.drawer[open][data-side="right"] {
+  animation: drawer-in-right 0.26s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.drawer[open][data-side="left"] {
+  animation: drawer-in-left 0.26s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes drawer-in-right {
+  from {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes drawer-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer[open] {
+    animation: none;
+  }
 }

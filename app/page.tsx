@@ -1,33 +1,32 @@
-import Hero from '@/components/Hero';
-import HowItWorks from '@/components/HowItWorks';
-import UseCases from '@/components/UseCases';
-import TechSection from '@/components/TechSection';
-import Reviews from '@/components/Reviews';
-import FAQ from '@/components/FAQ';
+import { Applications } from "@/components/home/Applications";
+import { BeforeAfter } from "@/components/home/BeforeAfter";
+import { BuySection } from "@/components/home/BuySection";
+import { CommercialBand } from "@/components/home/CommercialBand";
+import { FaqSection } from "@/components/home/FaqSection";
+import { FinalCta } from "@/components/home/FinalCta";
+import { Hero } from "@/components/home/Hero";
+import { HowItWorks } from "@/components/home/HowItWorks";
+import { Problem } from "@/components/home/Problem";
+import { Proof } from "@/components/home/Proof";
+import { Science } from "@/components/home/Science";
+import { Why } from "@/components/home/Why";
+import { resolveVideo } from "@/lib/media";
 
 export default function HomePage() {
   return (
     <>
-      <Hero
-        title="Say goodbye to condensation!"
-        subtitle="No Sweat™ is a clear, silica‑based spray that blocks condensation on any cup or tumbler—keeping surfaces clean and dry."
-        buttons={[
-          { label: 'Shop Now', href: '/product' },
-          // Anchor link to technology section on the same page
-          { label: 'Learn More', href: '#tech' },
-          { label: 'Wholesale', href: '/wholesale' },
-        ]}
-        videoSrc="/assets/drip-placeholder.mp4"
-        logoSrc="/assets/logo_red_cup.png"
-      />
-      <div className="absolute bottom-0 w-full h-15 bg-gradient-to-b from-transparent to-[#F7FBFD]" />
-      
+      <Hero video={resolveVideo("home-hero")} />
+      <Problem />
+      <Proof />
       <HowItWorks />
-      <UseCases />
-      {/* Technology section integrated into home page */}
-      <TechSection id="tech" />
-      {/* <Reviews /> */}
-      <FAQ />
+      <BuySection />
+      <BeforeAfter />
+      <Why />
+      <Applications />
+      <Science />
+      <CommercialBand video={resolveVideo("commercial-hero")} />
+      <FaqSection />
+      <FinalCta />
     </>
   );
 }

@@ -1,89 +1,124 @@
-// app/layout.tsx
-import './globals.css';
-import { Montserrat, Open_Sans } from 'next/font/google';
-import type { Metadata } from 'next';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import { CartProvider } from '@/components/CartContext';
-import FloatingCartButton from '@/components/FloatingCartButton';
-import Script from 'next/script';
+import type { Metadata, Viewport } from "next";
+import { Archivo, Public_Sans } from "next/font/google";
+import Script from "next/script";
 
-const siteUrl = 'https://nosweatsealer.com';
+import { CartDrawer } from "@/components/cart/CartDrawer";
+import { AnnouncementBar } from "@/components/site/AnnouncementBar";
+import { Footer } from "@/components/site/Footer";
+import { Header } from "@/components/site/Header";
+import { SITE } from "@/content/site";
+import { getSiteUrl } from "@/lib/config";
+
+import "./globals.css";
+
+const archivo = Archivo({
+  subsets: ["latin"],
+  axes: ["wdth"],
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-archivo",
+});
+
+const publicSans = Public_Sans({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-public-sans",
+});
+
+const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
-  // Required for generating absolute URLs in OG tags
   metadataBase: new URL(siteUrl),
   title: {
-    template: '%s | No Sweat™',
-    default: 'No Sweat™ – Stops Condensation',
+    default: "No Sweat® | The end of cup sweat",
+    template: "%s | No Sweat®",
   },
-  description:
-    'No Sweat™ is a clear, silica‑based spray that blocks condensation on any cup or tumbler, keeping surfaces clean and dry.',
-  keywords: [
-    'No Sweat',
-    'condensation spray',
-    'silica coating',
-    'drinkware',
-    'anti‑sweat',
-  ],
+  description: SITE.description,
+  applicationName: "No Sweat®",
+  robots: { index: true, follow: true },
   openGraph: {
-    title: 'No Sweat™ – Stops Condensation',
-    description:
-      'Discover No Sweat™, the clear silica‑based spray that prevents condensation on any cup or tumbler.',
+    type: "website",
+    siteName: "No Sweat®",
+    title: "No Sweat® | The end of cup sweat",
+    description: SITE.description,
     url: siteUrl,
-    siteName: 'No Sweat™',
     images: [
       {
-        // point at your OG image in public/
-        url: '/og-image.png',
+        url: "/og.jpg",
         width: 1200,
         height: 630,
-        alt: 'No Sweat product illustration',
+        alt: "No Sweat® logo over a condensation-covered tumbler and ice",
       },
     ],
-    locale: 'en_US',
-    type: 'website',
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'No Sweat™ – Stops Condensation',
-    description:
-      'Prevent cup condensation with No Sweat™, a clear silica‑based micro‑layer spray.',
-    images: ['/assets/goodbye_condensation.png'],
+    card: "summary_large_image",
+    title: "No Sweat® | The end of cup sweat",
+    description: SITE.description,
+    images: ["/og.jpg"],
   },
-  robots: { index: true, follow: true },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#05080d",
+  colorScheme: "dark",
+};
 
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  weight: ['700'],
-  variable: '--font-montserrat',
-});
-const openSans = Open_Sans({
-  subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-opensans',
-});
-
+const organization = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "No Sweat",
+  url: siteUrl,
+  logo: `${siteUrl}/icon.png`,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "PO Box 52",
+    addressLocality: "Detroit",
+    addressRegion: "ME",
+    postalCode: "04929",
+    addressCountry: "US",
+  },
+  telephone: SITE.contact.phone,
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+
   return (
-    <html lang='en' className={`${montserrat.variable} ${openSans.variable}`}>
-      <body className='bg-[#ffffff] text-[#111111] font-[var(--font-opensans)] flex flex-col min-h-screen'>
-        <CartProvider>
-          <script
-            src="https://d3qiklq6xff0my.cloudfront.net/popup.js"
-            data-site="nosweatsealer.com"
-            data-theme="light"
-            data-delay="2000"
-            defer
-          ></script>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <FloatingCartButton />
-        </CartProvider>
+    <html lang="en" className={`${archivo.variable} ${publicSans.variable}`}>
+      <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }}
+        />
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50 focus:rounded-[10px] focus:bg-cyan focus:px-4 focus:py-3 focus:font-semibold focus:text-void"
+        >
+          Skip to content
+        </a>
+        <AnnouncementBar />
+        <Header />
+        <main id="main">{children}</main>
+        <Footer />
+        <CartDrawer />
+
+        {gaId ? (
+          <>
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="afterInteractive" />
+            <Script id="ga-init" strategy="afterInteractive">
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}window.gtag=gtag;gtag('js',new Date());gtag('config','${gaId}',{anonymize_ip:true});`}
+            </Script>
+          </>
+        ) : null}
+
+        <Script
+          src="https://d3qiklq6xff0my.cloudfront.net/popup.js"
+          data-site="nosweatsealer.com"
+          data-theme="light"
+          data-delay="2000"
+          strategy="lazyOnload"
+        />
         <Script
           src="https://now-hiring-eta.vercel.app/widget.js"
           data-icon="Droplets"
